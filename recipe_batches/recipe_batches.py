@@ -1,4 +1,4 @@
-# !/usr/bin/python
+#!/usr/bin/python
 
 import math
 
@@ -7,19 +7,21 @@ def recipe_batches(recipe, ingredients):
   for key, ingredient in ingredients.items():
     if ingredient == 0:
       return 0
-    print(recipe[key])
+    batches = math.floor((recipe[key]) / ingredients[key])
+    if batches < max_batches:
+      max_batches = batches
   return max_batches
 
-recipe = { 'milk': 100, 'butter': 50, 'flour': 5 }
-ingredients = { 'milk': 132, 'butter': 48, 'flour': 51 }
-print(recipe_batches(recipe, ingredients))
+# recipe = { 'milk': 100, 'butter': 50, 'flour': 5 }
+# ingredients = { 'milk': 132, 'butter': 48, 'flour': 51 }
+# print(recipe_batches(recipe, ingredients))
 
-# if __name__ == '__main__':
-#   # Change the entries of these dictionaries to test 
-#   # your implementation with different inputs
-#   recipe = { 'milk': 100, 'butter': 50, 'flour': 5 }
-#   ingredients = { 'milk': 132, 'butter': 48, 'flour': 51 }
-#   print("{batches} batches can be made from the available ingredients: {ingredients}.".format(batches=recipe_batches(recipe, ingredients), ingredients=ingredients))
+if __name__ == '__main__':
+  # Change the entries of these dictionaries to test 
+  # your implementation with different inputs
+  recipe = { 'milk': 100, 'butter': 50, 'flour': 5 }
+  ingredients = { 'milk': 132, 'butter': 48, 'flour': 51 }
+  print("{batches} batches can be made from the available ingredients: {ingredients}.".format(batches=recipe_batches(recipe, ingredients), ingredients=ingredients))
 
 # Understand
 # Check the ingredient for every item in the recipe if there is enough
