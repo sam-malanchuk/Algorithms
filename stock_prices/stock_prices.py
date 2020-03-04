@@ -3,7 +3,7 @@
 import argparse
 
 def find_max_profit(prices):
-  max_profit_so_far = 0
+  max_profit_so_far = 0 - prices[0]
   for i in range(0, len(prices)):
     for j in range(i+1, len(prices)):
       if (prices[j] - prices[i]) > max_profit_so_far:
@@ -11,7 +11,7 @@ def find_max_profit(prices):
   return max_profit_so_far
 
 
-# print(find_max_profit([10, 20, 30, 40, 50, 60]))
+# print(find_max_profit([100, 90, 80, 50, 20, 10]))
 
 if __name__ == '__main__':
   # This is just some code to accept inputs from the command line
@@ -32,3 +32,7 @@ if __name__ == '__main__':
 # for every number in the list, run a for loop on every following number to see what profit was made
 # if the profit is lower than the maximum profit then replace it.
 # return the max profit
+
+# Execute
+# Max profit made so far has to be able to take negative integers
+# Set the initial value to the loss if bought at the first price, it will use the next best profit even if it's a loss
