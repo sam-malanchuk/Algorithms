@@ -1,24 +1,35 @@
-# !/usr/bin/python
+#!/usr/bin/python
 
 import sys
 
 def rock_paper_scissors(n):
-  rps = ['rock', 'paper', 'scissors']
-  sets = []
-  for rock in range(n):
-    for paper in range(n):
-      for scissors in range(n):
-        sets.append([rps[rock], rps[paper], rps[scissors]])
-  return sets
+  actions = ["rock", "paper", "scissors"]
 
-print(rock_paper_scissors(3))
+  def rps_recur(n):
+    nonlocal actions
+    set = list()
+    if n == 0:
+      set.append([])
+    elif n <= 1:
+      for a in actions:
+        set.append([a])
+    else:
+      for a in actions:
+        for perm in rps_recur(n - 1):
+          perm.insert(0, a)
+          set.append(perm)
+    return set
 
-# if __name__ == "__main__":
-#   if len(sys.argv) > 1:
-#     num_plays = int(sys.argv[1])
-#     print(rock_paper_scissors(num_plays))
-#   else:
-#     print('Usage: rps.py [num_plays]')
+  return rps_recur(n)
+
+# print(rock_paper_scissors(2))
+
+if __name__ == "__main__":
+  if len(sys.argv) > 1:
+    num_plays = int(sys.argv[1])
+    print(rock_paper_scissors(num_plays))
+  else:
+    print('Usage: rps.py [num_plays]')
 
 # Understand
 # 
