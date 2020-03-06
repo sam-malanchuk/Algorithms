@@ -5,7 +5,11 @@ import sys
 # The cache parameter is here for if you want to implement
 # a solution that is more efficient than the naive 
 # recursive solution
-def eating_cookies(n, cache=None):
+def eating_cookies(n, cache):
+  # check if the n has already been calculate
+  if cache and n in cache:
+    return n
+  
   # base case, he cannot eat anymore cookies
   if n == 0:
     return 1
@@ -13,18 +17,21 @@ def eating_cookies(n, cache=None):
   total_ways = 0
   if n >= 3:
     # eat all the cookies
-    total_ways += eating_cookies(n-3)
+    total_ways += eating_cookies(n-3, cache)
+    # save the result of n-3 into cache for reuse
+    cache[n-3] = total_ways
   if n >= 2:
     # eat 2 cookies
-    total_ways += eating_cookies(n-2)
+    total_ways += eating_cookies(n-2, cache)
+    cache[n-2] = total_ways
   if n >= 1:
     # eat 1 cookie
-    total_ways += eating_cookies(n-1)
+    total_ways += eating_cookies(n-1, cache)
+    cache[n-1] = total_ways
   return total_ways
 
 
-# print(eating_cookies(10))
-
+# print(eating_cookies(30, {}))
 
 if __name__ == "__main__":
   if len(sys.argv) > 1:
