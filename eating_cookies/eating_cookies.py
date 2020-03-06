@@ -5,29 +5,22 @@ import sys
 # The cache parameter is here for if you want to implement
 # a solution that is more efficient than the naive 
 # recursive solution
-def eating_cookies(n, cache):
+def eating_cookies(n, cache=dict()):
   # check if the n has already been calculate
-  if cache and n in cache:
-    return n
-  
+  if n in cache:
+    return cache[n]
+
   # base case, he cannot eat anymore cookies
-  if n == 0:
+  if n <= 0:
     return 1
-  
   total_ways = 0
-  if n >= 3:
-    # eat all the cookies
-    total_ways += eating_cookies(n-3, cache)
-    # save the result of n-3 into cache for reuse
-    cache[n-3] = total_ways
-  if n >= 2:
-    # eat 2 cookies
-    total_ways += eating_cookies(n-2, cache)
-    cache[n-2] = total_ways
-  if n >= 1:
-    # eat 1 cookie
-    total_ways += eating_cookies(n-1, cache)
-    cache[n-1] = total_ways
+  for i in range(1, 4):
+    if i < n:
+      total_ways += eating_cookies(n - i)
+    elif i == n:
+      total_ways += 1
+  # save the result of n into cache for reuse
+  cache[n] = total_ways
   return total_ways
 
 
